@@ -18,11 +18,18 @@ export function searchInsurance(values: SearchFormValues): SearchResult {
 
   const matchedProducts = companyProducts.filter((product) => {
     const companyMatch = matchedCompanyIds.includes(product.companyId);
-    const categoryMatch = product.category === values.goal;
+
+    const broadCategoryMatch =
+      values.goal === "암보험"
+        ? ["암보험", "건강보험"].includes(product.category)
+        : values.goal === "건강보험"
+        ? ["건강보험", "암보험"].includes(product.category)
+        : product.category === values.goal;
+
     const genderMatch =
       product.gender === "all" || product.gender === values.gender;
 
-    return companyMatch && categoryMatch && genderMatch;
+    return companyMatch && broadCategoryMatch && genderMatch;
   });
 
   const topRecommendations = rankProducts(matchedProducts, values);
