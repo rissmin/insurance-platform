@@ -56,7 +56,8 @@ function SearchForm({
               wordBreak: "keep-all",
             }}
           >
-            고객 조건을 입력하면 보험사와 상품을 검색해 추천합니다.
+            고객 조건을 입력하면 보험사와 상품을 먼저 검색한 뒤,
+            적합한 상품을 추천합니다.
           </p>
         </div>
 
@@ -71,7 +72,7 @@ function SearchForm({
             fontWeight: 700,
           }}
         >
-          모바일 최적화 입력폼
+          대형 보험사 반영
         </div>
       </div>
 
@@ -156,14 +157,14 @@ function SearchForm({
             style={inputStyle}
           >
             <option value="전체">전체</option>
-            <option value="삼성화재">삼성화재</option>
             <option value="현대해상">현대해상</option>
+            <option value="삼성화재">삼성화재</option>
             <option value="DB손해보험">DB손해보험</option>
             <option value="KB손해보험">KB손해보험</option>
             <option value="메리츠화재">메리츠화재</option>
-            <option value="한화손해보험">한화손해보험</option>
             <option value="롯데손해보험">롯데손해보험</option>
             <option value="NH농협손해보험">NH농협손해보험</option>
+            <option value="흥국화재">흥국화재</option>
           </select>
         </Field>
 
