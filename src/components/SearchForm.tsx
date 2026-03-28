@@ -60,20 +60,6 @@ function SearchForm({
             적합한 상품을 추천합니다.
           </p>
         </div>
-
-        <div
-          style={{
-            padding: "8px 12px",
-            borderRadius: "12px",
-            backgroundColor: "#f8fafc",
-            border: "1px solid #e2e8f0",
-            color: "#334155",
-            fontSize: "12px",
-            fontWeight: 700,
-          }}
-        >
-          대형 보험사 반영
-        </div>
       </div>
 
       <div
@@ -101,6 +87,19 @@ function SearchForm({
           >
             <option value="male">남성</option>
             <option value="female">여성</option>
+          </select>
+        </Field>
+
+        <Field label="병역 여부">
+          <select
+            value={values.militaryStatus}
+            onChange={(e) => onChange("militaryStatus", e.target.value)}
+            style={inputStyle}
+          >
+            <option value="해당없음">해당없음</option>
+            <option value="군필">군필</option>
+            <option value="미필">미필</option>
+            <option value="면제">면제</option>
           </select>
         </Field>
 

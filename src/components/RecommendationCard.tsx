@@ -24,6 +24,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
         boxShadow: isTop
           ? "0 14px 28px rgba(37, 99, 235, 0.12)"
           : "0 10px 22px rgba(15, 23, 42, 0.06)",
+        textAlign: "left",
       }}
     >
       {isTop && (
@@ -45,8 +46,8 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
         </div>
       )}
 
-      <div style={{ display: "grid", gap: "14px" }}>
-        <div>
+      <div style={{ display: "grid", gap: "14px", textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             style={{
               display: "inline-block",
@@ -71,6 +72,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
               lineHeight: 1.35,
               wordBreak: "keep-all",
               paddingRight: isTop ? "54px" : "0",
+              textAlign: "left",
             }}
           >
             {product.name}
@@ -82,6 +84,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
               color: "#475569",
               fontSize: "14px",
               fontWeight: 600,
+              textAlign: "left",
             }}
           >
             {product.company}
@@ -102,6 +105,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
               borderRadius: "16px",
               padding: "12px",
               border: "1px solid #e2e8f0",
+              textAlign: "left",
             }}
           >
             <div
@@ -110,6 +114,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
                 color: "#64748b",
                 fontWeight: 700,
                 marginBottom: "6px",
+                textAlign: "left",
               }}
             >
               핵심 비교
@@ -140,6 +145,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              textAlign: "left",
             }}
           >
             <div
@@ -147,6 +153,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
                 fontSize: "12px",
                 color: "#64748b",
                 fontWeight: 700,
+                textAlign: "left",
               }}
             >
               추천 점수
@@ -158,6 +165,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
                 color: "#1d4ed8",
                 marginTop: "4px",
                 lineHeight: 1,
+                textAlign: "left",
               }}
             >
               {product.score}
@@ -214,6 +222,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
           backgroundColor: "#f8fafc",
           border: "1px solid #e2e8f0",
           overflow: "hidden",
+          textAlign: "left",
         }}
       >
         <button
@@ -231,7 +240,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
             textAlign: "left",
           }}
         >
-          <div>
+          <div style={{ textAlign: "left" }}>
             <div
               style={{
                 fontSize: "16px",
@@ -239,6 +248,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
                 fontWeight: 800,
                 lineHeight: 1.4,
                 wordBreak: "keep-all",
+                textAlign: "left",
               }}
             >
               실전 상담 가이드
@@ -249,6 +259,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
                 fontSize: "12px",
                 color: "#64748b",
                 lineHeight: 1.5,
+                textAlign: "left",
               }}
             >
               {isGuideOpen
@@ -282,6 +293,7 @@ function RecommendationCard({ product, index }: RecommendationCardProps) {
           <div
             style={{
               padding: "0 16px 16px",
+              textAlign: "left",
             }}
           >
             <GuideBlock label="1. 상담 오프닝 멘트">
@@ -329,6 +341,7 @@ function QuickBadge({ text }: { text: string }) {
         fontWeight: 700,
         lineHeight: 1.2,
         wordBreak: "keep-all",
+        textAlign: "left",
       }}
     >
       {text}
@@ -351,6 +364,7 @@ function Section({
         borderRadius: "16px",
         backgroundColor: "#f8fafc",
         border: "1px solid #e2e8f0",
+        textAlign: "left",
       }}
     >
       <h4
@@ -361,11 +375,12 @@ function Section({
           fontWeight: 800,
           lineHeight: 1.4,
           wordBreak: "keep-all",
+          textAlign: "left",
         }}
       >
         {title}
       </h4>
-      <div>{children}</div>
+      <div style={{ textAlign: "left" }}>{children}</div>
     </div>
   );
 }
@@ -385,6 +400,7 @@ function GuideBlock({
         borderRadius: "12px",
         backgroundColor: "#ffffff",
         border: "1px solid #e2e8f0",
+        textAlign: "left",
       }}
     >
       <div
@@ -395,6 +411,7 @@ function GuideBlock({
           marginBottom: "8px",
           lineHeight: 1.5,
           wordBreak: "keep-all",
+          textAlign: "left",
         }}
       >
         {label}
@@ -419,6 +436,7 @@ function GuideListBlock({
         borderRadius: "12px",
         backgroundColor: "#ffffff",
         border: "1px solid #e2e8f0",
+        textAlign: "left",
       }}
     >
       <div
@@ -429,6 +447,7 @@ function GuideListBlock({
           marginBottom: "8px",
           lineHeight: 1.5,
           wordBreak: "keep-all",
+          textAlign: "left",
         }}
       >
         {label}
@@ -451,6 +470,7 @@ function InfoBox({ label, value }: { label: string; value: string }) {
         padding: "12px",
         border: "1px solid #e2e8f0",
         minWidth: 0,
+        textAlign: "left",
       }}
     >
       <div
@@ -460,6 +480,7 @@ function InfoBox({ label, value }: { label: string; value: string }) {
           marginBottom: "6px",
           fontWeight: 700,
           lineHeight: 1.4,
+          textAlign: "left",
         }}
       >
         {label}
@@ -471,6 +492,7 @@ function InfoBox({ label, value }: { label: string; value: string }) {
           color: "#0f172a",
           lineHeight: 1.5,
           wordBreak: "keep-all",
+          textAlign: "left",
         }}
       >
         {value}
@@ -485,6 +507,7 @@ const bodyTextStyle: React.CSSProperties = {
   lineHeight: 1.8,
   fontSize: "14px",
   wordBreak: "keep-all",
+  textAlign: "left",
 };
 
 const listStyle: React.CSSProperties = {
@@ -494,6 +517,7 @@ const listStyle: React.CSSProperties = {
   fontSize: "14px",
   paddingLeft: "2px",
   wordBreak: "keep-all",
+  textAlign: "left",
 };
 
 export default RecommendationCard;

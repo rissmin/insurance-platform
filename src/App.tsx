@@ -7,6 +7,7 @@ import { searchInsurance } from "./services/searchEngine";
 const initialValues: SearchFormValues = {
   age: "",
   gender: "male",
+  militaryStatus: "해당없음",
   budget: "",
   goal: "암보험",
   smoker: "no",
@@ -127,7 +128,7 @@ function App() {
             <p
               style={{
                 marginTop: "12px",
-                marginBottom: "18px",
+                marginBottom: "0",
                 fontSize: "14px",
                 lineHeight: 1.7,
                 color: "rgba(255,255,255,0.9)",
@@ -137,19 +138,6 @@ function App() {
               개인정보를 입력하면 보험사와 상품을 먼저 검색한 뒤,
               조건에 맞는 최적 상품 5개를 추천합니다.
             </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
-              }}
-            >
-              <HeaderBadge text="보험사 검색" />
-              <HeaderBadge text="상품 검색" />
-              <HeaderBadge text="Top 5 추천" />
-              <HeaderBadge text="상담 스크립트" />
-            </div>
           </div>
         </header>
 
@@ -282,46 +270,24 @@ function App() {
           )}
 
           {recommendations.length > 0 && (
-            <>
-              <div
-                style={{
-                  display: "grid",
-                  gap: "16px",
-                }}
-              >
-                {recommendations.map((product, index) => (
-                  <RecommendationCard
-                    key={product.id}
-                    product={product}
-                    index={index}
-                  />
-                ))}
-              </div>
-
-
-            </>
+            <div
+              style={{
+                display: "grid",
+                gap: "16px",
+              }}
+            >
+              {recommendations.map((product, index) => (
+                <RecommendationCard
+                  key={product.id}
+                  product={product}
+                  index={index}
+                />
+              ))}
+            </div>
           )}
         </section>
       </div>
     </div>
-  );
-}
-
-function HeaderBadge({ text }: { text: string }) {
-  return (
-    <span
-      style={{
-        padding: "8px 11px",
-        borderRadius: "999px",
-        backgroundColor: "rgba(255,255,255,0.12)",
-        border: "1px solid rgba(255,255,255,0.18)",
-        fontSize: "12px",
-        fontWeight: 700,
-        color: "#ffffff",
-      }}
-    >
-      {text}
-    </span>
   );
 }
 
