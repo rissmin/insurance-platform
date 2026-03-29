@@ -7,7 +7,7 @@ import { searchInsurance } from "./services/searchEngine";
 const initialValues: SearchFormValues = {
   age: "",
   gender: "male",
-  militaryStatus: "해당없음",
+  militaryStatus: "없음",
   budget: "",
   goal: "암보험",
   smoker: "no",
