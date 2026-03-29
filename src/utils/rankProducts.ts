@@ -4,6 +4,10 @@ import type {
   SearchFormValues,
 } from "../types/insurance";
 
+type ScoredRecommendation = Recommendation & {
+  isEligible: boolean;
+};
+
 export function rankProducts(
   products: Product[],
   values: SearchFormValues
@@ -12,11 +16,14 @@ export function rankProducts(
   const budgetNumber = Number(values.budget);
   const hasCondition = values.preExistingCondition !== "없음";
 
-  const scored: Recommendation[] = products.map((product) => {
+  const scored: ScoredRecommendation[] = products.map((product) => {
     let score = 0;
+    let isEligible = true;
+
     const reasons: string[] = [];
     const advicePoints: string[] = [];
 
+    // 1. 가입 목적 일치 여부
     if (product.category === values.goal) {
       score += 30;
       reasons.push("가입 목적과 정확히 일치하는 상품입니다.");
@@ -26,18 +33,23 @@ export function rankProducts(
     } else if (values.goal === "건강보험" && product.category === "암보험") {
       score += 10;
       reasons.push("건강보험 대신 암 중심 보장을 우선 보고 싶을 때 대안이 될 수 있습니다.");
+    } else {
+      // 운전자보험/실손보험 등은 목적이 다르면 제외에 가깝게 처리
+      score -= 20;
     }
 
+    // 2. 나이 조건
     if (values.age) {
       if (ageNumber >= product.minAge && ageNumber <= product.maxAge) {
         score += 15;
         reasons.push("현재 나이에 가입 가능한 상품입니다.");
       } else {
-        score -= 30;
-        reasons.push("가입 가능 나이와는 차이가 있습니다.");
+        isEligible = false;
+        score -= 100;
       }
     }
 
+    // 3. 예산 비교
     if (values.budget) {
       const gap = Math.abs(product.monthlyPrice - budgetNumber);
 
@@ -51,33 +63,44 @@ export function rankProducts(
         score += 8;
         reasons.push("예산과 비교적 무난하게 맞는 편입니다.");
       } else {
-        reasons.push("예산과는 다소 차이가 있습니다.");
+        score -= 8;
       }
     }
 
+    // 4. 갱신 선호
     if (
       values.renewalType !== "상관없음" &&
       product.renewalType === values.renewalType
     ) {
       score += 12;
       reasons.push("원하는 갱신 조건과 일치합니다.");
+    } else if (values.renewalType !== "상관없음") {
+      score -= 8;
     }
 
+    // 5. 보험사 선호
     if (
       values.preferredCompany !== "전체" &&
       product.company === values.preferredCompany
     ) {
       score += 12;
       reasons.push("선호 보험사와 일치합니다.");
+    } else if (values.preferredCompany !== "전체") {
+      score -= 8;
     }
 
+    // 6. 성별 적합성
     if (product.gender === "all") {
       score += 3;
     } else if (product.gender === values.gender) {
       score += 8;
       reasons.push("성별 특성을 반영한 상품입니다.");
+    } else {
+      isEligible = false;
+      score -= 100;
     }
 
+    // 7. 우선순위 반영
     if (
       values.priority === "보험료" &&
       values.budget &&
@@ -107,6 +130,7 @@ export function rankProducts(
       advicePoints.push("장기적으로 보험료 변동 부담이 적은 구조라는 점을 강조하세요.");
     }
 
+    // 8. 카테고리별 추가 보정
     if (values.goal === "실손보험" && product.coverageTags.includes("실손")) {
       score += 8;
       reasons.push("실손 목적에 맞는 의료비 보장 구조를 갖추고 있습니다.");
@@ -127,7 +151,7 @@ export function rankProducts(
       reasons.push("건강 종합 보장 성격이 잘 맞는 상품입니다.");
     }
 
-    // 유병자 / 간편심사 반영
+    // 9. 유병자 / 간편심사 반영
     if (hasCondition) {
       if (
         product.coverageTags.includes("간편심사") ||
@@ -137,7 +161,8 @@ export function rankProducts(
         reasons.push("사전 체크 질병이 있는 경우 검토하기 좋은 유병자/간편심사 상품입니다.");
         advicePoints.push("질병 이력이 있는 고객도 비교적 접근 가능한 구조라는 점을 강조하세요.");
       } else {
-        score -= 4;
+        // 질병이 있는데 일반 상품이면 추천은 가능하더라도 큰 감점
+        score -= 18;
       }
 
       if (values.preExistingCondition === "암 병력" && product.category === "암보험") {
@@ -162,6 +187,7 @@ export function rankProducts(
       }
     }
 
+    // 10. 흡연 여부
     if (values.smoker === "yes" && product.smokerAllowed) {
       score += 2;
     }
@@ -174,6 +200,7 @@ export function rankProducts(
     return {
       ...product,
       score,
+      isEligible,
       reasons,
       advicePoints,
       consultationGuide: {
@@ -187,21 +214,30 @@ export function rankProducts(
     };
   });
 
+  // 정렬
+  let sorted: ScoredRecommendation[];
+
   if (values.sortBy === "보험료낮은순") {
-    return diversifyByCompany(
+    sorted = diversifyByCompany(
       scored.sort((a, b) => a.monthlyPrice - b.monthlyPrice)
-    ).slice(0, 5);
-  }
-
-  if (values.sortBy === "보험료높은순") {
-    return diversifyByCompany(
+    );
+  } else if (values.sortBy === "보험료높은순") {
+    sorted = diversifyByCompany(
       scored.sort((a, b) => b.monthlyPrice - a.monthlyPrice)
-    ).slice(0, 5);
+    );
+  } else {
+    sorted = diversifyByCompany(
+      scored.sort((a, b) => b.score - a.score)
+    );
   }
 
-  return diversifyByCompany(
-    scored.sort((a, b) => b.score - a.score)
-  ).slice(0, 5);
+  // 최종 필터:
+  // 1) 가입 가능해야 함
+  // 2) 점수 50점 이상이어야 함
+  return sorted
+    .filter((item) => item.isEligible && item.score >= 50)
+    .slice(0, 5)
+    .map(({ isEligible, ...rest }) => rest);
 }
 
 function buildOpener(product: Product): string {
@@ -291,7 +327,7 @@ function buildClosing(product: Product): string {
   return `${product.name}은(는) 현재 조건 대비 균형이 좋은 상품입니다. 오늘 설명드린 기준으로 다른 상품과 비교해도 핵심 목적과 유지 가능성 면에서 충분히 검토할 가치가 있습니다.`;
 }
 
-function diversifyByCompany(items: Recommendation[]): Recommendation[] {
+function diversifyByCompany(items: ScoredRecommendation[]): ScoredRecommendation[] {
   const companySeen: Record<string, number> = {};
 
   const adjusted = items.map((item) => {
