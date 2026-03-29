@@ -47,11 +47,11 @@ function App() {
     <div
       style={{
         minHeight: "100vh",
-        background:
-          "linear-gradient(180deg, #eef4ff 0%, #f8fbff 35%, #f5f7fb 100%)",
+        background: "#F8FAFC",
         padding: "14px",
         fontFamily:
           "'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif",
+        color: "#1F2937",
       }}
     >
       <div
@@ -66,32 +66,43 @@ function App() {
             position: "relative",
             overflow: "hidden",
             background:
-              "linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #60a5fa 100%)",
-            borderRadius: "22px",
-            padding: "24px 18px",
-            boxShadow: "0 18px 40px rgba(37, 99, 235, 0.18)",
-            color: "#ffffff",
-            marginBottom: "16px",
+              "linear-gradient(135deg, #1E3A8A 0%, #1E40AF 55%, #3B82F6 100%)",
+            borderRadius: "12px",
+            padding: "22px 18px",
+            boxShadow: "0 10px 24px -8px rgba(30, 64, 175, 0.30)",
+            color: "#FFFFFF",
+            marginBottom: "14px",
+            border: "1px solid rgba(255,255,255,0.10)",
           }}
         >
           <div
             style={{
               position: "absolute",
-              right: "-70px",
-              top: "-70px",
-              width: "180px",
-              height: "180px",
+              inset: 0,
+              opacity: 0.12,
+              backgroundImage:
+                "radial-gradient(circle at 18% 18%, rgba(255,255,255,0.28) 0, rgba(255,255,255,0) 28%), radial-gradient(circle at 82% 30%, rgba(255,255,255,0.20) 0, rgba(255,255,255,0) 25%), radial-gradient(circle at 62% 84%, rgba(255,255,255,0.18) 0, rgba(255,255,255,0) 22%)",
+            }}
+          />
+
+          <div
+            style={{
+              position: "absolute",
+              right: "-50px",
+              top: "-40px",
+              width: "160px",
+              height: "160px",
               borderRadius: "999px",
-              background: "rgba(255,255,255,0.10)",
+              background: "rgba(255,255,255,0.08)",
             }}
           />
           <div
             style={{
               position: "absolute",
-              right: "30px",
-              bottom: "-60px",
-              width: "140px",
-              height: "140px",
+              right: "40px",
+              bottom: "-70px",
+              width: "150px",
+              height: "150px",
               borderRadius: "999px",
               background: "rgba(255,255,255,0.07)",
             }}
@@ -100,26 +111,32 @@ function App() {
           <div style={{ position: "relative", zIndex: 1 }}>
             <div
               style={{
-                display: "inline-block",
-                padding: "7px 12px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 12px",
                 borderRadius: "999px",
-                backgroundColor: "rgba(255,255,255,0.14)",
+                background: "rgba(255,255,255,0.14)",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+                border: "1px solid rgba(255,255,255,0.18)",
                 fontSize: "12px",
                 fontWeight: 700,
-                marginBottom: "14px",
+                marginBottom: "12px",
                 letterSpacing: "0.2px",
               }}
             >
-              AI 보험 추천 · 상담 보조
+              AI 보험 추천
             </div>
 
             <h1
               style={{
                 margin: 0,
-                fontSize: "28px",
-                lineHeight: 1.25,
+                fontSize: "27px",
+                lineHeight: 1.3,
                 fontWeight: 800,
                 wordBreak: "keep-all",
+                letterSpacing: "-0.02em",
               }}
             >
               보험 상품 검색 및 추천 서비스
@@ -127,16 +144,17 @@ function App() {
 
             <p
               style={{
-                marginTop: "12px",
-                marginBottom: "0",
+                marginTop: "10px",
+                marginBottom: 0,
                 fontSize: "14px",
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.9)",
+                lineHeight: 1.75,
+                color: "rgba(255,255,255,0.92)",
                 wordBreak: "keep-all",
+                maxWidth: "720px",
               }}
             >
               개인정보를 입력하면 보험사와 상품을 먼저 검색한 뒤,
-              조건에 맞는 최적 상품 5개를 추천합니다.
+              조건에 맞는 최적 상품을 추천합니다.
             </p>
           </div>
         </header>
@@ -150,12 +168,11 @@ function App() {
 
         <section
           style={{
-            backgroundColor: "rgba(255,255,255,0.94)",
-            backdropFilter: "blur(10px)",
-            borderRadius: "22px",
-            padding: "18px",
-            boxShadow: "0 16px 34px rgba(15, 23, 42, 0.08)",
-            border: "1px solid rgba(255,255,255,0.7)",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "12px",
+            padding: "16px",
+            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.08)",
+            border: "1px solid #E5E7EB",
           }}
         >
           <div
@@ -172,20 +189,22 @@ function App() {
               <h2
                 style={{
                   marginTop: 0,
-                  marginBottom: "6px",
-                  fontSize: "22px",
-                  color: "#0f172a",
+                  marginBottom: "4px",
+                  fontSize: "21px",
+                  color: "#1F2937",
                   fontWeight: 800,
+                  lineHeight: 1.35,
+                  letterSpacing: "-0.01em",
                 }}
               >
                 검색 및 추천 결과
               </h2>
               <p
                 style={{
-                  margin: "6px 0 0",
-                  color: "#64748b",
-                  fontSize: "14px",
-                  lineHeight: 1.6,
+                  margin: "4px 0 0",
+                  color: "#6B7280",
+                  fontSize: "13px",
+                  lineHeight: 1.65,
                 }}
               >
                 검색된 보험사와 상품을 기준으로 적합한 상품을 추천합니다.
@@ -195,13 +214,14 @@ function App() {
             {searched && recommendations.length > 0 && (
               <div
                 style={{
-                  padding: "9px 12px",
+                  padding: "8px 12px",
                   borderRadius: "999px",
-                  backgroundColor: "#eff6ff",
-                  color: "#1d4ed8",
+                  backgroundColor: "#EFF6FF",
+                  color: "#1E40AF",
                   fontWeight: 700,
-                  fontSize: "13px",
-                  border: "1px solid #bfdbfe",
+                  fontSize: "12px",
+                  border: "1px solid #BFDBFE",
+                  whiteSpace: "nowrap",
                 }}
               >
                 추천 {recommendations.length}개
@@ -212,11 +232,11 @@ function App() {
           {!searched && (
             <div
               style={{
-                padding: "18px",
-                borderRadius: "16px",
-                backgroundColor: "#f8fafc",
-                border: "1px dashed #cbd5e1",
-                color: "#64748b",
+                padding: "16px",
+                borderRadius: "10px",
+                backgroundColor: "#F8FAFC",
+                border: "1px dashed #CBD5E1",
+                color: "#6B7280",
                 fontSize: "14px",
                 lineHeight: 1.7,
                 wordBreak: "keep-all",
@@ -230,13 +250,13 @@ function App() {
             <div
               style={{
                 marginBottom: "14px",
-                padding: "14px",
-                borderRadius: "14px",
-                backgroundColor: "#f8fafc",
-                border: "1px solid #e2e8f0",
-                color: "#334155",
+                padding: "13px 14px",
+                borderRadius: "10px",
+                backgroundColor: "#F8FAFC",
+                border: "1px solid #E5E7EB",
+                color: "#374151",
                 fontSize: "13px",
-                lineHeight: 1.8,
+                lineHeight: 1.75,
                 wordBreak: "keep-all",
               }}
             >
@@ -253,11 +273,11 @@ function App() {
           {searched && recommendations.length === 0 && (
             <div
               style={{
-                padding: "18px",
-                borderRadius: "16px",
-                backgroundColor: "#fef2f2",
-                border: "1px solid #fecaca",
-                color: "#b91c1c",
+                padding: "16px",
+                borderRadius: "10px",
+                backgroundColor: "#FEF2F2",
+                border: "1px solid #FECACA",
+                color: "#B91C1C",
                 fontSize: "14px",
                 lineHeight: 1.7,
                 wordBreak: "keep-all",
@@ -273,7 +293,7 @@ function App() {
             <div
               style={{
                 display: "grid",
-                gap: "16px",
+                gap: "14px",
               }}
             >
               {recommendations.map((product, index) => (

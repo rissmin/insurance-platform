@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { SearchFormValues } from "../types/insurance";
 
 type SearchFormProps = {
@@ -16,13 +17,12 @@ function SearchForm({
   return (
     <section
       style={{
-        backgroundColor: "rgba(255,255,255,0.94)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "22px",
-        padding: "18px",
-        boxShadow: "0 16px 34px rgba(15, 23, 42, 0.08)",
-        border: "1px solid rgba(255,255,255,0.7)",
-        marginBottom: "16px",
+        backgroundColor: "#FFFFFF",
+        borderRadius: "12px",
+        padding: "16px",
+        boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.08)",
+        border: "1px solid #E5E7EB",
+        marginBottom: "14px",
       }}
     >
       <div
@@ -32,17 +32,19 @@ function SearchForm({
           alignItems: "flex-start",
           gap: "12px",
           flexWrap: "wrap",
-          marginBottom: "18px",
+          marginBottom: "16px",
         }}
       >
         <div>
           <h2
             style={{
               marginTop: 0,
-              marginBottom: "6px",
-              fontSize: "22px",
-              color: "#0f172a",
+              marginBottom: "4px",
+              fontSize: "21px",
+              color: "#1F2937",
               fontWeight: 800,
+              lineHeight: 1.35,
+              letterSpacing: "-0.01em",
             }}
           >
             개인정보 입력
@@ -50,9 +52,9 @@ function SearchForm({
           <p
             style={{
               margin: 0,
-              color: "#64748b",
-              fontSize: "14px",
-              lineHeight: 1.6,
+              color: "#6B7280",
+              fontSize: "13px",
+              lineHeight: 1.65,
               wordBreak: "keep-all",
             }}
           >
@@ -66,154 +68,152 @@ function SearchForm({
         style={{
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "12px",
+          gap: "10px",
         }}
       >
         <Field label="나이">
-          <input
-            type="number"
+          <InputWithSuffix
             value={values.age}
-            onChange={(e) => onChange("age", e.target.value)}
             placeholder="예: 35"
-            style={inputStyle}
+            suffix="세"
+            onChange={(value) => onChange("age", value)}
           />
         </Field>
 
         <Field label="성별">
-          <select
+          <StyledSelect
             value={values.gender}
-            onChange={(e) => onChange("gender", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="male">남성</option>
-            <option value="female">여성</option>
-          </select>
+            onChange={(value) => onChange("gender", value)}
+            options={[
+              { label: "남성", value: "male" },
+              { label: "여성", value: "female" },
+            ]}
+          />
         </Field>
 
         <Field label="병역 여부">
-          <select
+          <StyledSelect
             value={values.militaryStatus}
-            onChange={(e) => onChange("militaryStatus", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="해당없음">해당없음</option>
-            <option value="군필">군필</option>
-            <option value="미필">미필</option>
-            <option value="면제">면제</option>
-          </select>
+            onChange={(value) => onChange("militaryStatus", value)}
+            options={[
+              { label: "해당없음", value: "해당없음" },
+              { label: "군필", value: "군필" },
+              { label: "미필", value: "미필" },
+              { label: "면제", value: "면제" },
+            ]}
+          />
         </Field>
 
-        <Field label="월 예산(원)">
-          <input
-            type="number"
+        <Field label="월 예산">
+          <InputWithSuffix
             value={values.budget}
-            onChange={(e) => onChange("budget", e.target.value)}
             placeholder="예: 50000"
-            style={inputStyle}
+            suffix="원"
+            onChange={(value) => onChange("budget", value)}
           />
         </Field>
 
         <Field label="가입 목적">
-          <select
+          <StyledSelect
             value={values.goal}
-            onChange={(e) => onChange("goal", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="암보험">암보험</option>
-            <option value="실손보험">실손보험</option>
-            <option value="건강보험">건강보험</option>
-            <option value="운전자보험">운전자보험</option>
-          </select>
+            onChange={(value) => onChange("goal", value)}
+            options={[
+              { label: "암보험", value: "암보험" },
+              { label: "실손보험", value: "실손보험" },
+              { label: "건강보험", value: "건강보험" },
+              { label: "운전자보험", value: "운전자보험" },
+            ]}
+          />
         </Field>
 
         <Field label="흡연 여부">
-          <select
+          <StyledSelect
             value={values.smoker}
-            onChange={(e) => onChange("smoker", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="no">비흡연</option>
-            <option value="yes">흡연</option>
-          </select>
+            onChange={(value) => onChange("smoker", value)}
+            options={[
+              { label: "비흡연", value: "no" },
+              { label: "흡연", value: "yes" },
+            ]}
+          />
         </Field>
 
         <Field label="갱신 선호">
-          <select
+          <StyledSelect
             value={values.renewalType}
-            onChange={(e) => onChange("renewalType", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="상관없음">상관없음</option>
-            <option value="비갱신형">비갱신형</option>
-            <option value="갱신형">갱신형</option>
-          </select>
+            onChange={(value) => onChange("renewalType", value)}
+            options={[
+              { label: "상관없음", value: "상관없음" },
+              { label: "비갱신형", value: "비갱신형" },
+              { label: "갱신형", value: "갱신형" },
+            ]}
+          />
         </Field>
 
         <Field label="선호 보험사">
-          <select
+          <StyledSelect
             value={values.preferredCompany}
-            onChange={(e) => onChange("preferredCompany", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="전체">전체</option>
-            <option value="현대해상">현대해상</option>
-            <option value="삼성화재">삼성화재</option>
-            <option value="DB손해보험">DB손해보험</option>
-            <option value="KB손해보험">KB손해보험</option>
-            <option value="메리츠화재">메리츠화재</option>
-            <option value="롯데손해보험">롯데손해보험</option>
-            <option value="NH농협손해보험">NH농협손해보험</option>
-            <option value="흥국화재">흥국화재</option>
-          </select>
+            onChange={(value) => onChange("preferredCompany", value)}
+            options={[
+              { label: "전체", value: "전체" },
+              { label: "현대해상", value: "현대해상" },
+              { label: "삼성화재", value: "삼성화재" },
+              { label: "DB손해보험", value: "DB손해보험" },
+              { label: "KB손해보험", value: "KB손해보험" },
+              { label: "메리츠화재", value: "메리츠화재" },
+              { label: "롯데손해보험", value: "롯데손해보험" },
+              { label: "NH농협손해보험", value: "NH농협손해보험" },
+              { label: "흥국화재", value: "흥국화재" },
+            ]}
+          />
         </Field>
 
         <Field label="중요하게 보는 기준">
-          <select
+          <StyledSelect
             value={values.priority}
-            onChange={(e) => onChange("priority", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="기본">기본</option>
-            <option value="보험료">보험료</option>
-            <option value="보장범위">보장범위</option>
-            <option value="비갱신">비갱신</option>
-          </select>
+            onChange={(value) => onChange("priority", value)}
+            options={[
+              { label: "기본", value: "기본" },
+              { label: "보험료", value: "보험료" },
+              { label: "보장범위", value: "보장범위" },
+              { label: "비갱신", value: "비갱신" },
+            ]}
+          />
         </Field>
 
         <Field label="정렬 방식">
-          <select
+          <StyledSelect
             value={values.sortBy}
-            onChange={(e) => onChange("sortBy", e.target.value)}
-            style={inputStyle}
-          >
-            <option value="추천순">추천순</option>
-            <option value="보험료낮은순">보험료 낮은 순</option>
-            <option value="보험료높은순">보험료 높은 순</option>
-          </select>
+            onChange={(value) => onChange("sortBy", value)}
+            options={[
+              { label: "추천순", value: "추천순" },
+              { label: "보험료 낮은 순", value: "보험료낮은순" },
+              { label: "보험료 높은 순", value: "보험료높은순" },
+            ]}
+          />
         </Field>
       </div>
 
       <div
         style={{
-          marginTop: "18px",
+          marginTop: "16px",
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "10px",
+          gap: "8px",
         }}
       >
         <button
           onClick={onSearch}
           style={{
             width: "100%",
-            background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
-            color: "#ffffff",
+            background: "linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)",
+            color: "#FFFFFF",
             border: "none",
-            borderRadius: "14px",
-            padding: "16px 18px",
-            fontSize: "16px",
+            borderRadius: "10px",
+            padding: "15px 18px",
+            fontSize: "15px",
             fontWeight: 800,
             cursor: "pointer",
-            boxShadow: "0 12px 24px rgba(37, 99, 235, 0.22)",
+            boxShadow: "0 8px 18px rgba(59, 130, 246, 0.22)",
           }}
         >
           보험 추천 받기
@@ -223,13 +223,13 @@ function SearchForm({
           onClick={onReset}
           style={{
             width: "100%",
-            backgroundColor: "#ffffff",
-            color: "#334155",
-            border: "1px solid #cbd5e1",
-            borderRadius: "14px",
-            padding: "15px 18px",
-            fontSize: "15px",
-            fontWeight: 800,
+            backgroundColor: "#FFFFFF",
+            color: "#374151",
+            border: "1px solid #CBD5E1",
+            borderRadius: "10px",
+            padding: "14px 18px",
+            fontSize: "14px",
+            fontWeight: 700,
             cursor: "pointer",
           }}
         >
@@ -250,10 +250,11 @@ function Field({
   return (
     <div
       style={{
-        backgroundColor: "#f8fafc",
-        borderRadius: "16px",
-        padding: "12px",
-        border: "1px solid #e2e8f0",
+        backgroundColor: "#F8FAFC",
+        borderRadius: "10px",
+        padding: "10px",
+        border: "1px solid #E5E7EB",
+        textAlign: "left",
       }}
     >
       <label style={labelStyle}>{label}</label>
@@ -262,24 +263,120 @@ function Field({
   );
 }
 
+function StyledSelect({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: { label: string; value: string }[];
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      style={{
+        width: "100%",
+        padding: "13px 12px",
+        borderRadius: "10px",
+        border: isFocused ? "1.5px solid #3B82F6" : "1.5px solid #CBD5E1",
+        fontSize: "15px",
+        boxSizing: "border-box",
+        outline: "none",
+        backgroundColor: "#FFFFFF",
+        color: "#1F2937",
+        textAlign: "left",
+        boxShadow: isFocused ? "0 0 0 4px rgba(59,130,246,0.10)" : "none",
+        transition: "all 0.15s ease",
+        minHeight: "46px",
+      }}
+    >
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function InputWithSuffix({
+  value,
+  placeholder,
+  suffix,
+  onChange,
+}: {
+  value: string;
+  placeholder: string;
+  suffix: string;
+  onChange: (value: string) => void;
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        borderRadius: "10px",
+        border: isFocused ? "1.5px solid #3B82F6" : "1.5px solid #CBD5E1",
+        backgroundColor: "#FFFFFF",
+        boxShadow: isFocused ? "0 0 0 4px rgba(59,130,246,0.10)" : "none",
+        transition: "all 0.15s ease",
+        overflow: "hidden",
+        minHeight: "46px",
+      }}
+    >
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        style={{
+          flex: 1,
+          padding: "13px 12px",
+          border: "none",
+          outline: "none",
+          fontSize: "15px",
+          backgroundColor: "transparent",
+          color: "#1F2937",
+          minWidth: 0,
+        }}
+      />
+      <div
+        style={{
+          padding: "0 12px",
+          color: "#6B7280",
+          fontSize: "13px",
+          fontWeight: 700,
+          whiteSpace: "nowrap",
+          borderLeft: "1px solid #E5E7EB",
+          minHeight: "46px",
+          display: "flex",
+          alignItems: "center",
+          backgroundColor: "#FCFCFD",
+        }}
+      >
+        {suffix}
+      </div>
+    </div>
+  );
+}
+
 const labelStyle: React.CSSProperties = {
   display: "block",
-  marginBottom: "8px",
-  fontWeight: 800,
+  marginBottom: "7px",
+  fontWeight: 700,
   fontSize: "13px",
-  color: "#334155",
-};
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "14px 13px",
-  borderRadius: "12px",
-  border: "1px solid #cbd5e1",
-  fontSize: "16px",
-  boxSizing: "border-box",
-  outline: "none",
-  backgroundColor: "#ffffff",
-  color: "#0f172a",
+  color: "#6B7280",
+  textAlign: "left",
 };
 
 export default SearchForm;
