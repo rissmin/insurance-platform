@@ -23,6 +23,7 @@ function SearchForm({
         boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.08)",
         border: "1px solid #E5E7EB",
         marginBottom: "14px",
+        overflow: "hidden",
       }}
     >
       <div
@@ -35,7 +36,7 @@ function SearchForm({
           marginBottom: "16px",
         }}
       >
-        <div>
+        <div style={{ width: "100%" }}>
           <h2
             style={{
               marginTop: 0,
@@ -45,6 +46,7 @@ function SearchForm({
               fontWeight: 800,
               lineHeight: 1.35,
               letterSpacing: "-0.01em",
+              textAlign: "left",
             }}
           >
             개인정보 입력
@@ -56,6 +58,7 @@ function SearchForm({
               fontSize: "13px",
               lineHeight: 1.65,
               wordBreak: "keep-all",
+              textAlign: "left",
             }}
           >
             고객 조건을 입력하면 보험사와 상품을 먼저 검색한 뒤,
@@ -69,6 +72,8 @@ function SearchForm({
           display: "grid",
           gridTemplateColumns: "1fr",
           gap: "10px",
+          width: "100%",
+          minWidth: 0,
         }}
       >
         <Field label="나이">
@@ -199,6 +204,8 @@ function SearchForm({
           display: "grid",
           gridTemplateColumns: "1fr",
           gap: "8px",
+          width: "100%",
+          minWidth: 0,
         }}
       >
         <button
@@ -255,6 +262,8 @@ function Field({
         padding: "10px",
         border: "1px solid #E5E7EB",
         textAlign: "left",
+        width: "100%",
+        minWidth: 0,
       }}
     >
       <label style={labelStyle}>{label}</label>
@@ -282,6 +291,7 @@ function StyledSelect({
       onBlur={() => setIsFocused(false)}
       style={{
         width: "100%",
+        minWidth: 0,
         padding: "13px 12px",
         borderRadius: "10px",
         border: isFocused ? "1.5px solid #3B82F6" : "1.5px solid #CBD5E1",
@@ -322,14 +332,16 @@ function InputWithSuffix({
     <div
       style={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "stretch",
+        width: "100%",
+        maxWidth: "100%",
+        minWidth: 0,
         borderRadius: "10px",
         border: isFocused ? "1.5px solid #3B82F6" : "1.5px solid #CBD5E1",
         backgroundColor: "#FFFFFF",
         boxShadow: isFocused ? "0 0 0 4px rgba(59,130,246,0.10)" : "none",
         transition: "all 0.15s ease",
         overflow: "hidden",
-        minHeight: "46px",
       }}
     >
       <input
@@ -340,25 +352,27 @@ function InputWithSuffix({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         style={{
-          flex: 1,
+          flex: "1 1 auto",
+          minWidth: 0,
+          width: "100%",
           padding: "13px 12px",
           border: "none",
           outline: "none",
           fontSize: "15px",
           backgroundColor: "transparent",
           color: "#1F2937",
-          minWidth: 0,
+          boxSizing: "border-box",
         }}
       />
       <div
         style={{
+          flexShrink: 0,
           padding: "0 12px",
           color: "#6B7280",
           fontSize: "13px",
           fontWeight: 700,
           whiteSpace: "nowrap",
           borderLeft: "1px solid #E5E7EB",
-          minHeight: "46px",
           display: "flex",
           alignItems: "center",
           backgroundColor: "#FCFCFD",

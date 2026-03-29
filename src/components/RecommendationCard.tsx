@@ -34,17 +34,22 @@ function highlightText(text: string): React.ReactNode {
     "적합",
   ];
 
-  let result: React.ReactNode[] = [text];
+  let result: Array<string | React.ReactElement> = [text];
 
-  keywords.forEach((keyword) => {
-    result = result.flatMap((part) => {
-      if (typeof part !== "string") return [part];
+  keywords.forEach((keyword: string) => {
+    result = result.flatMap((part: string | React.ReactElement) => {
+      if (typeof part !== "string") {
+        return [part];
+      }
 
       const split = part.split(new RegExp(`(${keyword})`, "g"));
 
-      return split.map((s, i) =>
+      return split.map((s: string, i: number) =>
         s === keyword ? (
-          <strong key={`${keyword}-${i}`} style={{ color: "#1F2937", fontWeight: 800 }}>
+          <strong
+            key={`${keyword}-${i}`}
+            style={{ color: "#1F2937", fontWeight: 800 }}
+          >
             {s}
           </strong>
         ) : (
@@ -56,6 +61,7 @@ function highlightText(text: string): React.ReactNode {
 
   return result;
 }
+
 
 function RecommendationCard({ product, index }: RecommendationCardProps) {
   const isTop = index === 0;
