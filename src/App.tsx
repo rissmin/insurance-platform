@@ -3,11 +3,12 @@ import SearchForm from "./components/SearchForm";
 import RecommendationCard from "./components/RecommendationCard";
 import type { SearchFormValues, SearchResult } from "./types/insurance";
 import { searchInsurance } from "./services/searchEngine";
+import "./App.css";
 
 const initialValues: SearchFormValues = {
   age: "",
   gender: "male",
-  militaryStatus: "없음",
+  preExistingCondition: "없음",
   budget: "",
   goal: "암보험",
   smoker: "no",

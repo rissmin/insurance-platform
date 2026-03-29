@@ -61,8 +61,8 @@ function SearchForm({
               textAlign: "left",
             }}
           >
-            고객 조건을 입력하면 보험사와 상품을 먼저 검색한 뒤,
-            적합한 상품을 추천합니다.
+            나이, 예산, 건강 상태 등 가입 전 확인이 필요한 조건을 입력하면
+            보험사와 상품을 검색한 뒤 적합한 상품을 추천합니다.
           </p>
         </div>
       </div>
@@ -96,25 +96,25 @@ function SearchForm({
           />
         </Field>
 
-<Field label="사전 체크 질병">
-  <StyledSelect
-    value={values.militaryStatus}
-    onChange={(value) => onChange("militaryStatus", value)}
-    options={[
-      { label: "없음", value: "없음" },
-      { label: "고혈압", value: "고혈압" },
-      { label: "당뇨", value: "당뇨" },
-      { label: "고지혈증", value: "고지혈증" },
-      { label: "심장질환", value: "심장질환" },
-      { label: "뇌혈관질환", value: "뇌혈관질환" },
-      { label: "암 병력", value: "암 병력" },
-      { label: "간질환", value: "간질환" },
-      { label: "신장질환", value: "신장질환" },
-      { label: "갑상선질환", value: "갑상선질환" },
-      { label: "기타 질병", value: "기타 질병" },
-    ]}
-  />
-</Field>
+        <Field label="과거 치료 이력">
+          <StyledSelect
+            value={values.preExistingCondition}
+            onChange={(value) => onChange("preExistingCondition", value)}
+            options={[
+              { label: "없음", value: "없음" },
+              { label: "고혈압", value: "고혈압" },
+              { label: "당뇨", value: "당뇨" },
+              { label: "고지혈증", value: "고지혈증" },
+              { label: "심장질환", value: "심장질환" },
+              { label: "뇌혈관질환", value: "뇌혈관질환" },
+              { label: "암 병력", value: "암 병력" },
+              { label: "간질환", value: "간질환" },
+              { label: "신장질환", value: "신장질환" },
+              { label: "갑상선질환", value: "갑상선질환" },
+              { label: "기타 질병", value: "기타 질병" },
+            ]}
+          />
+        </Field>
 
         <Field label="월 예산">
           <InputWithSuffix

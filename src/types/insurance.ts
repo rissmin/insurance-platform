@@ -39,7 +39,7 @@ export type Recommendation = Product & {
 export type SearchFormValues = {
   age: string;
   gender: string;
-  militaryStatus: string;
+  preExistingCondition: string;
   budget: string;
   goal: string;
   smoker: string;
